@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<form method="POST" action="">
+  {{ form.hidden_tag() }}
+  <div class="login">
+    {{ form.FirstName.label }} {{ form.FirstName }}
+    {% for error in form.FirstName.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+  </div>
+  <div class="login">
+    {{ form.LastName.label }} {{ form.LastName}}
+    {% for error in form.LastName.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+  </div>
+    <div class="login">
+    {{ form.Address.label }} {{ form.Address}}
+    {% for error in form.Address.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+  </div>
+  <div class="login">
+    {{ form.Card_No.label }} {{ form.Card_No}}
+    {% for error in form.Card_No.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+  </div>
+  <div class="login">
+    {{ form.ExpDate.label }} {{ form.ExpDate}}
+    {% for error in form.ExpDate.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+  </div>
+  <div class="login">
+    {{ form.CVC.label }} {{ form.CVC}}
+    {% for error in form.CVC.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+  </div>
+
+
+<div class="login">
+  {{ form.Submit() }}
+</div>
+
+<div class="login">
+      {{ total }}
+</div>
+
+</form>
+
+{% endblock content %}''

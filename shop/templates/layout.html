@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename= 'style.css') }}"/>
+  <title>{{ title }}</title>
+</head>
+
+<body>
+
+  <div id="banner">
+    <a href="{{ url_for('home') }}" class="header">StationaryFix</a>&nbsp
+    <a href="{{ url_for('about') }}" class="header">StationaryFix@hotmail.co.uk  | 01633 123456 </a>&nbsp
+    {% if current_user.is_admin %}
+    <a href="{{ url_for('adminpage') }}" class="header">Admin</a>&nbsp
+    {% endif %}
+  </div>
+  <div id="header">
+    <a href="{{ url_for('home') }}" class="header">Home</a>&nbsp
+    <a href="{{ url_for('about') }}" class="header">About Us</a>&nbsp
+    {% if current_user.is_authenticated %}
+    Hello, {{ current_user.username }}!
+    <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>&nbsp
+    {% else %}
+    Hello, Guest! &nbsp <a href="{{ url_for('login') }}">Login&nbsp;</a>
+    or <a href="{{ url_for('register') }}">Register</a>&nbsp
+    {% endif %}
+    <a href="{{ url_for('basket_display') }}" class="header">Basket [{{total_quantity}}] </a>&nbsp
+    <a href="{{ url_for('wishlist_display') }}" class="header">My Wishlist [{{total_quantity}}]</a>&nbsp
+    {% if current_user.is_authenticated %}
+    <a href="{{ url_for('account') }}" class="header">Account</a>&nbsp
+    {% endif %}
+  </div>
+
+  <div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+  </div>
+
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+</body>
+</html>

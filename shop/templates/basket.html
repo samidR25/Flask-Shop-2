@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+
+<table class="center">
+<tr><th>Product</th><th>Quantity</th><th>Price</th><th>Total</th></tr>
+  {% for key, value in display_basket.items() %}
+  <tr>
+    <td>{{ value["title"] }}</td>
+    <td>{{ value["quantity"] }}</td>
+    <td>£{{ value["price"] }}</td>
+    <td>£{{ (value["quantity"] * value["price"]) }}</td>
+
+    <td>
+      <form action="{{ url_for('delete_item', item_id=key|int) }}" method="POST">
+        <input class="center" type="submit" value="Delete">
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+
+</table>
+<h3>Total: £{{ total }} </h3>
+<h3>Number of items: {{ total_quantity }} </h3>
+
+{% if current_user.is_authenticated %}
+
+<a href = "{{ url_for('checkout') }}">
+    <button id="check">Checkout</button>
+</a>&nbsp
+
+{% else %}
+
+<a href = "{{ url_for('register') }}">Create an account to checkout</a>
+
+{% endif %}
+
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Your Account</h1>
+<h3 id="account">Update Email</h3>
+<form method="POST" action="{{ url_for('account') }}">
+	{{ update_email.csrf_token }}
+    <div class="login">
+	<span>Current Email: {{ current_user.email }}</span><br/>
+	</div>
+
+    <div class="login">
+	{{ update_email.email.label }}
+	{{ update_email.email }}
+	</div>
+
+	<div class="login">
+	{{ update_email.password.label }}
+	{{ update_email.password }}
+	</div>
+	<div class="login">
+	<input type="submit" value="Update Email" />
+	</div>
+</form>
+<h3>Update Email</h3>
+<form method="POST" action="{{ url_for('account') }}">
+	{{ update_password.csrf_token }}
+	<div class="login">
+	{{ update_password.password.label }}
+	{{ update_password.password }}
+	</div>
+	<div class="login">
+	{{ update_password.new_password.label }}
+	{{ update_password.new_password }}
+	</div>
+	<div class="login">
+	{{ update_password.confirm_new_password.label }}
+	{{ update_password.confirm_new_password }}
+	<br />
+	</div>
+	<div class="login">
+	<input type="submit" value="Update Password" />
+	</div>
+</form>
+
+{% endblock content %}
